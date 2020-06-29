@@ -9,12 +9,40 @@ const TodoForm = ({handleSubmit, inputText, setInputText}) => {
     </form>)
 }
 
-const TodoList = ({todoList}) => {
+const TodoList = ({todoList, setTodoList}) => {
+  const editTodo = i => {
+    const editText = window.prompt("Edit", todoList[i])
+    if(editText !== null){
+      const tempTodoList = [...todoList]
+      tempTodoList[i] = editText
+      setTodoList([...tempTodoList])
+    }
+  }
+
+  const deleteTodo = i => {
+    const tempTodoList = [...todoList]
+    tempTodoList.splice(i, 1)
+    setTodoList([...tempTodoList])
+  }
+
   return (
     <div>
-      {todoList.map(item => <div>{item}</div>)}
+      {todoList.map((item, idx) => <TodoItem 
+                                      key={idx} 
+                                      item={item} 
+                                      index={idx}
+                                      editTodo={editTodo}
+                                      deleteTodo={deleteTodo} 
+                                    />)}
     </div>
   )
+}
+
+const TodoItem = ({item, index, editTodo, deleteTodo}) => {
+  return (<div>{index + 1}. {item} 
+            <button onClick={() => editTodo(index)}>Edit</button>
+            <button onClick={() => deleteTodo(index)}>Delete</button> 
+          </div>)
 }
 
 const TodoListApp = props => {
@@ -34,7 +62,7 @@ const TodoListApp = props => {
       handleSubmit={handleSubmit} 
       inputText={inputText} 
       setInputText={setInputText}/>
-    <TodoList todoList={todoList} />
+    <TodoList todoList={todoList} setTodoList={setTodoList} />
   </div>)
 
 }
