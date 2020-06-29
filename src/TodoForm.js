@@ -6,7 +6,7 @@ const TodoForm = ({handleSubmit, inputText, setInputText}) => {
                     type="text" 
                     value={inputText} 
                     onChange={event => setInputText(event.target.value)} />
-                <button type="submit">Add</button>
+                <button className="btn btn-default" type="submit">Add</button>
             </form>)
 }
 

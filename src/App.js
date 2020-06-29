@@ -15,7 +15,7 @@ const TodoListApp = props => {
   }
 
   return (
-  <div>
+  <div className="container">
     <TodoForm 
       handleSubmit={handleSubmit} 
       inputText={inputText} 
