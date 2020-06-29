@@ -9,7 +9,7 @@ const TodoListApp = props => {
   const [inputText, setInputText] = useState("")
 
   const handleSubmit = (event) => {
-    setTodoList([...todoList, inputText])
+    setTodoList([...todoList, {todo: inputText, done: false}])
     setInputText("")
     event.preventDefault()
   }

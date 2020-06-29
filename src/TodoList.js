@@ -3,17 +3,23 @@ import TodoItem from './TodoItem'
 
 const TodoList = ({todoList, setTodoList}) => {
     const editTodo = i => {
-        const editText = window.prompt("Edit", todoList[i])
+        const editText = window.prompt("Edit", todoList[i].todo)
         if(editText !== null){
-        const tempTodoList = [...todoList]
-        tempTodoList[i] = editText
-        setTodoList([...tempTodoList])
+            const tempTodoList = [...todoList]
+            tempTodoList[i] = {...tempTodoList[i], todo: editText}
+            setTodoList([...tempTodoList])
         }
     }
   
     const deleteTodo = i => {
         const tempTodoList = [...todoList]
         tempTodoList.splice(i, 1)
+        setTodoList([...tempTodoList])
+    }
+
+    const toggleCheck = i => {
+        const tempTodoList = [...todoList]
+        tempTodoList[i] = {...tempTodoList[i], done: !tempTodoList[i].done}
         setTodoList([...tempTodoList])
     }
   
@@ -24,7 +30,8 @@ const TodoList = ({todoList, setTodoList}) => {
                                             item={item} 
                                             index={idx}
                                             editTodo={editTodo}
-                                            deleteTodo={deleteTodo} 
+                                            deleteTodo={deleteTodo}
+                                            toggleCheck={toggleCheck}
                                             />)}
         </div>
     )
